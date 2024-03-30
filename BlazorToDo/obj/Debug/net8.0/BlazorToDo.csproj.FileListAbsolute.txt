@@ -19,7 +19,6 @@
 /Users/babrov/RiderProjects/BlazorToDo/BlazorToDo/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.BlazorToDo.props
 /Users/babrov/RiderProjects/BlazorToDo/BlazorToDo/obj/Debug/net8.0/staticwebassets.pack.json
 /Users/babrov/RiderProjects/BlazorToDo/BlazorToDo/obj/Debug/net8.0/scopedcss/Components/Layout/MainLayout.razor.rz.scp.css
-/Users/babrov/RiderProjects/BlazorToDo/BlazorToDo/obj/Debug/net8.0/scopedcss/Components/Layout/NavMenu.razor.rz.scp.css
 /Users/babrov/RiderProjects/BlazorToDo/BlazorToDo/obj/Debug/net8.0/scopedcss/bundle/BlazorToDo.styles.css
 /Users/babrov/RiderProjects/BlazorToDo/BlazorToDo/obj/Debug/net8.0/scopedcss/projectbundle/BlazorToDo.bundle.scp.css
 /Users/babrov/RiderProjects/BlazorToDo/BlazorToDo/obj/Debug/net8.0/BlazorToDo.dll
@@ -27,3 +26,5 @@
 /Users/babrov/RiderProjects/BlazorToDo/BlazorToDo/obj/Debug/net8.0/BlazorToDo.pdb
 /Users/babrov/RiderProjects/BlazorToDo/BlazorToDo/obj/Debug/net8.0/BlazorToDo.genruntimeconfig.cache
 /Users/babrov/RiderProjects/BlazorToDo/BlazorToDo/obj/Debug/net8.0/ref/BlazorToDo.dll
+/Users/babrov/RiderProjects/BlazorToDo/BlazorToDo/obj/Debug/net8.0/BlazorToDo.sourcelink.json
+/Users/babrov/RiderProjects/BlazorToDo/BlazorToDo/obj/Debug/net8.0/scopedcss/Components/NavMenu.razor.rz.scp.css
