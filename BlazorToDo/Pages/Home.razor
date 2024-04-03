@@ -2,69 +2,55 @@
 @rendermode InteractiveServer
 
 <PageTitle>Home</PageTitle>
+<h1>To do list</h1>
+
+<button type="button" class="btn btn-primary" @onclick="OpenModal">Add todo</button>
 
 
-<h1>Todo (@items.Count(todo => !todo.IsDone))</h1>
+<div class="d-flex">
+    <div class="list d-flex p-2 flex-column">
+        <h2>Todo (@items.Count(todo => !todo.IsDone))</h2>
 
-<div class="list d-flex p-2 flex-column">
-    @foreach (var item in items.Where(item => !item.IsDone))
-    {
-        <div class="card">
-            <div class="card-body">
-                <input @bind="item.Title"/>
-                <p class="card-text">@item.Description</p>
-                <input type="checkbox" @bind="item.IsDone"/>
-            </div>
-        </div>
-    }
-</div>
-
-<h2>Completed (@completedItems.Count())</h2>
-
-<div class="list-completed d-flex p-2 flex-column">
-    @foreach (var item in completedItems)
-    {
-        <div class="card">
-            <div class="card-body">
-                <input @bind="item.Title"/>
-                <p class="card-text">@item.Description</p>
-                <input type="checkbox" @bind="item.IsDone"/>
-            </div>
-        </div>
-    }
-</div>
-
-<input placeholder="Something todo" @bind="newTodo"/>
-<button @onclick="AddTodo">Add todo</button>
-
-
-@code {
-
-    class ToDoItem
-    {
-        public bool IsDone { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-    }
-
-    private string? newTodo;
-
-    private readonly List<ToDoItem> items =
-        new()
+        @foreach (IToDoItem item in items.Where(item => !item.IsDone))
         {
-            new ToDoItem { IsDone = true, Title = "Add modal", Description = "Modal form" },
-            new ToDoItem { IsDone = false, Title = "Add validation", Description = "Just for testing validation" }
-        };
-
-    private List<ToDoItem> completedItems => items.Where(item => item.IsDone).ToList();
-
-    private void AddTodo()
-    {
-        if (!string.IsNullOrWhiteSpace(newTodo))
-        {
-            items.Add(new ToDoItem { Title = newTodo });
-            newTodo = string.Empty;
+            <ToDoItemComponent Item="item" @key="item" OnCheck="@ToDoChecked"/>
         }
-    }
+    </div>
 
-}
+
+    <div class="list-completed d-flex p-2 flex-column">
+        <h2>Completed (@completedItems.Count())</h2>
+
+        @foreach (IToDoItem completedItem in completedItems)
+        {
+            <ToDoItemComponent Item="completedItem" @key="completedItem" OnCheck="@ToDoChecked"/>
+        }
+    </div>
+
+</div>
+
+
+<Modal Title="Are you sure?" OnClose="ModalClose" IsOpen="isModalOpen">
+    <ModalBody>
+        <EditForm EditContext="editContext" id="ToDoForm" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <InputText id="title" @bind-Value="@TodoItemModel.Title"/>
+                <ValidationMessage For="@(() => TodoItemModel.Title)"/>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <InputText id="description" @bind-Value="@TodoItemModel.Description"/>
+                <ValidationMessage For="@(() => TodoItemModel.Description)"/>
+            </div>
+        </EditForm>
+    </ModalBody>
+    <ModalFooter>
+        <button type="submit" form="ToDoForm">Submit</button>
+        <button @onclick="ModalClose">Cancel</button>
+    </ModalFooter>
+</Modal>
