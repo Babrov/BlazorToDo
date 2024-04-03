@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-body">
+        <h3>@Item.Title</h3>
+        <p class="card-text">@Item.Description</p>
+        <input type="checkbox" checked="@Item.IsDone" @onchange="() => HandleCheckboxChange(Item)"/>
+    </div>
+</div>
+
+@code {
+    [Parameter] public IToDoItem Item { get; set; }
+    [Parameter] public EventCallback<IToDoItem> OnCheck { get; set; }
+
+    private async Task HandleCheckboxChange(IToDoItem item)
+    {
+        await OnCheck.InvokeAsync(item);
+    }
+
+}
